@@ -1,0 +1,8 @@
+export { Nav } from './Nav'
+export { Hero } from './Hero'
+export { TrustBadges } from './TrustBadges'
+export { Products } from './Products'
+export { About } from './About'
+export { WhyChooseUs } from './WhyChooseUs'
+export { Contact } from './Contact'
+export { Footer } from './Footer'

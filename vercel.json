@@ -1,0 +1,13 @@
+{
+  "buildCommand": "bun run build",
+  "outputDirectory": ".output/public",
+  "framework": null,
+  "installCommand": "bun install",
+  "devCommand": "bun run dev",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
