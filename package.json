@@ -7,7 +7,7 @@
     "start": "bun run server.ts",
     "build": "tsr generate && tsc --noEmit && vite build --sourcemap",
     "build:node": "tsr generate && FOR_SITES=true vite build",
-    "build:static": "tsr generate && vite build --mode production",
+    "build:static": "tsr generate && vite build --mode production"
     "serve": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
