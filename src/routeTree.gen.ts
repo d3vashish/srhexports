@@ -64,20 +64,20 @@ const ApiHelloRoute = ApiHelloRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof PublicIndexRoute
   '/hello': typeof ApiHelloRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-out': typeof AuthSignOutRoute
   '/sign-up': typeof AuthSignUpRoute
   '/example-protected-route': typeof ProtectedExampleProtectedRouteRoute
-  '/': typeof PublicIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof PublicIndexRoute
   '/hello': typeof ApiHelloRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-out': typeof AuthSignOutRoute
   '/sign-up': typeof AuthSignUpRoute
   '/example-protected-route': typeof ProtectedExampleProtectedRouteRoute
-  '/': typeof PublicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,20 +94,20 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/hello'
     | '/sign-in'
     | '/sign-out'
     | '/sign-up'
     | '/example-protected-route'
-    | '/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/hello'
     | '/sign-in'
     | '/sign-out'
     | '/sign-up'
     | '/example-protected-route'
-    | '/'
   id:
     | '__root__'
     | '/_auth'
@@ -133,21 +133,21 @@ declare module '@tanstack/react-router' {
     '/_public': {
       id: '/_public'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_protected': {
       id: '/_protected'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof ProtectedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }

@@ -4,24 +4,23 @@ import viteReact from '@vitejs/plugin-react'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
 import devtoolsJson from 'vite-plugin-devtools-json'
-import { nitroV2Plugin } from '@tanstack/nitro-v2-vite-plugin'
 import path from 'path'
 
-const forSites = process.env?.FOR_SITES === 'true'
-
-const config = defineConfig({
+export default defineConfig({
   plugins: [
-    // this is the plugin that enables path aliases
-    viteTsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
+    viteTsConfigPaths({ projects: ['./tsconfig.json'] }),
     tailwindcss(),
-    tanstackStart(),
-    forSites &&
-      nitroV2Plugin({
-        compatibilityDate: '2025-10-08',
-        preset: 'node',
-      }),
+    tanstackStart({
+      // Enable prerendering only for public homepage
+      prerender: {
+        enabled: true,
+        // Only prerender the homepage, skip auth/protected routes
+        routes: ['/'],
+        // Disable auto-discovery to prevent crawling auth routes
+        autoStaticPathsDiscovery: false,
+        crawlLinks: false,
+      },
+    }),
     devtoolsJson(),
     viteReact(),
   ],
@@ -40,5 +39,3 @@ const config = defineConfig({
     emptyOutDir: true,
   },
 })
-
-export default config

@@ -1,5 +1,9 @@
 {
   "framework": null,
   "buildCommand": "bun run build:static",
+<<<<<<< HEAD
   "outputDirectory": "dist/client"
+=======
+  "outputDirectory": "dist/client/client"
+>>>>>>> 4163527 (Describe your changes)
 }
