@@ -5,6 +5,7 @@ import viteTsConfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
 import devtoolsJson from 'vite-plugin-devtools-json'
 import { nitroV2Plugin } from '@tanstack/nitro-v2-vite-plugin'
+import path from 'path'
 
 const forSites = process.env?.FOR_SITES === 'true'
 
@@ -24,10 +25,19 @@ const config = defineConfig({
     devtoolsJson(),
     viteReact(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   server: {
     host: '::',
     allowedHosts: true,
     hmr: true,
+  },
+  build: {
+    outDir: 'dist/client',
+    emptyOutDir: true,
   },
 })
 
