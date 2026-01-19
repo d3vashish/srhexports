@@ -7,11 +7,7 @@
     "start": "bun run server.ts",
     "build": "tsr generate && tsc --noEmit && vite build --sourcemap",
     "build:node": "tsr generate && FOR_SITES=true vite build",
-<<<<<<< HEAD
-    "build:static": "tsr build --static",
-=======
     "build:static": "tsr generate && vite build --mode production && node scripts/post-build.js",
->>>>>>> 4163527 (Describe your changes)
     "serve": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
