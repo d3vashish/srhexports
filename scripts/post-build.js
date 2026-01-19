@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readdir } from 'fs/promises'
+import { copyFile, readdir, access } from 'fs/promises'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -7,11 +7,21 @@ const __dirname = dirname(__filename)
 
 const outputDir = join(__dirname, '../dist/client')
 const clientDir = join(outputDir, 'client')
+const publicDir = join(__dirname, '../public')
+
+async function fileExists(path) {
+  try {
+    await access(path)
+    return true
+  } catch {
+    return false
+  }
+}
 
 async function ensureIndexHtml() {
   try {
     // TanStack Start outputs HTML to dist/client/client/index.html
-    // We need to copy it to dist/client/index.html for static hosting
+    // Copy it to dist/client/index.html for static hosting
     const sourcePath = join(clientDir, 'index.html')
     const targetPath = join(outputDir, 'index.html')
     
@@ -43,4 +53,24 @@ async function ensureIndexHtml() {
   }
 }
 
-ensureIndexHtml()
+async function copyRedirects() {
+  try {
+    // Copy _redirects file to build output for static hosting
+    const redirectsSource = join(publicDir, '_redirects')
+    const redirectsTarget = join(clientDir, '_redirects')
+    
+    if (await fileExists(redirectsSource)) {
+      await copyFile(redirectsSource, redirectsTarget)
+      console.log('✓ Copied _redirects to dist/client/client/')
+    }
+  } catch (error) {
+    console.warn('⚠ Could not copy _redirects file:', error.message)
+  }
+}
+
+async function main() {
+  await ensureIndexHtml()
+  await copyRedirects()
+}
+
+main()
